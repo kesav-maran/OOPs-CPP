@@ -1,0 +1,32 @@
+//Implementation of a program that computes the Least Common Multiple (LCM) of two given integers and displays the result.
+
+#include<iostream>
+using namespace std;
+class LCMCalculator
+{
+public:
+    int n1,n2;
+    int ans(int value){
+        int mul = n1 * n2;
+        return mul / value;
+    }
+    int lcm(int a, int b){
+        n1=a;
+        n2=b;
+        while(b!=0){
+            int r=a %b;
+            a = b;
+            b = r;
+        }
+        int an = ans(a);
+        return an;
+    }
+};
+
+int main() {
+    int X, Y;
+    cin >> X >> Y;
+    LCMCalculator obj;
+    cout << obj.lcm(X, Y) << endl;
+    return 0;
+}
