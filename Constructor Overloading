@@ -1,0 +1,39 @@
+//Implement constructor overloading to initialize the student information and determine the best student based on their marks.
+
+#include<iostream>
+using namespace std;
+class Student
+{
+public:
+    string name;
+    int marks;
+    Student()
+    {
+        name="";
+        marks=0;
+    }
+    Student(string n,int m)
+    {
+        name=n;
+        marks=m;
+    }
+};
+int main()
+{
+    int N;
+    cin>>N;
+    Student best;
+    for(int i=0;i<N;i++)
+    {
+        string n;
+        int m;
+        cin>>n>>m;
+        Student s(n,m);
+        if(i==0 || s.marks>best.marks)
+        {
+            best = s;
+        }
+    }
+    cout<<best.name<<" "<<best.marks;
+    return 0;
+}
