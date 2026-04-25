@@ -1,0 +1,50 @@
+//the estimated travel range for both a fuel-based car and an electric car.
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+class Vehicle {
+public:
+    double capacity;
+    Vehicle(double cap) : capacity(cap)
+    {
+    }
+};
+class Car : public Vehicle {
+public:
+    double efficiency;
+    Car(double cap, double eff) : Vehicle(cap), efficiency(eff) {}
+
+    double calculateEstimatedRange() {
+        return capacity * efficiency;
+    }
+};
+
+class ElectricCar : public Car {
+public:
+    ElectricCar(double cap, double eff) : Car(cap, eff)
+    {
+    }
+    double calculateEstimatedRange() {
+        return capacity * efficiency;
+    }
+};
+int main() {
+    double fuelCapacity, fuelEfficiency;
+    double batteryCapacity, electricEfficiency;
+
+    cin >> fuelCapacity >> fuelEfficiency;
+    cin >> batteryCapacity >> electricEfficiency;
+
+    Car gasCar(fuelCapacity, fuelEfficiency);
+    ElectricCar electricCar(batteryCapacity, electricEfficiency);
+
+    double gasCarRange = gasCar.calculateEstimatedRange();
+    double electricCarRange = electricCar.calculateEstimatedRange();
+
+    cout << fixed << setprecision(1);
+    cout << "Car Estimated Range: " << gasCarRange << " miles" << endl;
+    cout << "Electric Car Estimated Range: " << electricCarRange << " miles";
+
+    return 0;
+}
