@@ -1,0 +1,74 @@
+//TimeCalculator class that stores time in hours, minutes, and seconds format and provides functionality to add different time units.
+
+// You are using GCC
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <cstdio>
+
+using namespace std;
+
+class TimeCalculator {
+private:
+    int hours, minutes, seconds;
+
+    void normalize() {
+        minutes += seconds / 60;
+        seconds %= 60;
+        hours += minutes / 60;
+        minutes %= 60;
+        hours %= 24;
+    }
+
+public:
+    TimeCalculator(int h, int m, int s) : hours(h), minutes(m), seconds(s) {
+        normalize();
+    }
+
+    // Overloaded method to add seconds
+    void addTime(int s) {
+        seconds += s;
+        normalize();
+    }
+
+    // Overloaded method to add minutes
+    void addTime(int m, bool isMinute) {
+        minutes += m;
+        normalize();
+    }
+
+    // Overloaded method to add hours
+    void addTime(int h, char isHour) {
+        hours += h;
+        normalize();
+    }
+
+    void display() {
+        cout << "Updated Time: " 
+             << setfill('0') << setw(2) << hours << ":" 
+             << setw(2) << minutes << ":" 
+             << setw(2) << seconds << endl;
+    }
+};
+
+int main() {
+    string timeStr;
+    int sAdd, mAdd, hAdd;
+    int h, m, s;
+
+    if (!(cin >> timeStr >> sAdd >> mAdd >> hAdd)) return 0;
+
+    // Parsing HH:MM:SS format
+    sscanf(timeStr.c_str(), "%d:%d:%d", &h, &m, &s);
+
+    TimeCalculator tc(h, m, s);
+
+    // Using overloaded methods
+    tc.addTime(sAdd);             // Adds seconds
+    tc.addTime(mAdd, true);       // Adds minutes
+    tc.addTime(hAdd, 'h');        // Adds hours
+
+    tc.display();
+
+    return 0;
+}
