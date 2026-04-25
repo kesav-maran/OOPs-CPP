@@ -1,0 +1,24 @@
+//calculation of the interest for a given account balance using the updated interest rate, and prints the result to two decimal places.
+
+#include <iostream>
+using namespace std;
+class BankAccount {
+public:
+    float ir,bal;
+    void set(float r, float b){
+        ir=r;
+        bal=b;
+    }
+    void neu(){
+        printf("%.2f",ir * bal);
+    }
+};
+int main(){
+    float ir,bal;
+    cin>>ir;
+    cin>>bal;
+    BankAccount b;
+    b.set(ir,bal);
+    b.neu();
+    return 0;
+}
