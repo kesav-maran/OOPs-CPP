@@ -1,0 +1,41 @@
+//Create a base class, Experiment, with a virtual function analyzeResults(). Implement two derived classes, ChemistryExperiment and PhysicsExperiment, to analyze chemistry and physics experiments.
+
+#include <iostream>
+#include <iomanip> 
+using namespace std;
+class Experiment
+{
+public:
+    virtual void analyzeResults()=0;
+};
+class ChemistryExperiment : public Experiment
+{
+    double a, b;
+public:
+    void analyzeResults() {
+        cin >> a >> b;
+        cout << fixed << setprecision(2) << a * b << endl;
+    }
+};
+
+class PhysicsExperiment : public Experiment {
+    double v, acc, t;
+public:
+    void analyzeResults() {
+        cin >> v >> acc >> t;
+        cout << fixed << setprecision(2) << v + (acc * t) << " m/s" << endl;
+    }
+};
+
+int main() {
+    char choice;
+    cin >> choice;
+    if (choice == 'C' || choice == 'c') {
+        ChemistryExperiment c;
+        c.analyzeResults();
+    } else if (choice == 'P' || choice == 'p') {
+        PhysicsExperiment p;
+        p.analyzeResults();
+    } 
+    return 0;
+}
