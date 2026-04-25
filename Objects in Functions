@@ -1,0 +1,41 @@
+// Creating 2 bank account with parameterized constructor
+
+#include <iostream>
+#include <string>
+using namespace std;
+class Account {
+public:
+    string name;
+    double balance;
+    Account(string n, double b) {
+        name = n;
+        balance = b;
+    }
+    void transferAmount(Account &to, double amount) {
+        if (balance >= amount) {
+            balance -= amount;
+            to.balance += amount;
+        } else {
+            cout << "Insufficient funds for transfer." << endl;
+        }
+    }
+
+    void show() {
+        cout << name << "'s balance: " << balance << endl;
+    }
+};
+
+int main() {
+    string n1, n2;
+    double b1, b2, amt;
+    cin >> n1 >> b1 >> n2 >> b2 >> amt;
+
+    Account acc1(n1, b1), acc2(n2, b2);
+    acc1.show();
+    acc2.show();
+    acc1.transferAmount(acc2, amt);
+    acc1.show();
+    acc2.show();
+
+    return 0;
+}
