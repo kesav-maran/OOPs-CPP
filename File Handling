@@ -1,0 +1,25 @@
+//determine if each resulted in profit or loss, and display the corresponding financial outcome from the 'sales.txt' file.
+
+#include<iostream>
+#include<fstream>
+using namespace std;
+int main(){
+    int n, cp, sp;
+    ifstream fin;
+    fin.open("sales.txt");
+    cin>>n;
+    for(int i=0; i<n; i++){
+        cin>>cp>>sp;
+        if(sp>cp){
+            cout<<"Profit: Rs."<<(sp-cp)<<endl;
+        }
+        else if(cp>sp){
+            cout<<"Loss: Rs."<<(cp-sp)<<endl;
+        }
+        else{
+            cout<<"No profit or no loss!"<<endl;
+        }
+    }
+    fin.close();
+    return 0;
+}
