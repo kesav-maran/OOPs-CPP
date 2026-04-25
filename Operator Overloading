@@ -1,0 +1,33 @@
+//A and B as input, negates them using - operator overloading, and then calculates and prints the addition and subtraction of the negated values.
+
+#include <iostream>
+using namespace std;
+class Number
+{
+public:
+    int num1, num2;
+    Number(){}
+    Number(int a, int b){
+        num1 = a;
+        num2 = b;
+    }
+    Number operator-(){
+        Number temp;
+        temp.num1 = -num1;
+        temp.num2 = -num2;
+        return temp;
+    }
+};
+int main() {
+    int A, B;
+    cin >> A >> B;
+
+    Number pair(A, B);
+    Number negated = -pair;
+
+    int addition = negated.num1 + negated.num2;
+    int subtraction = negated.num1 - negated.num2;
+
+    cout << addition << " " << subtraction;
+    return 0;
+}
