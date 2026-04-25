@@ -1,0 +1,32 @@
+//the result of adding the two fractions in the format: resultNumerator/resultDenominator
+
+  #include <iostream>
+using namespace std;
+class Fraction {
+    int num, den;
+public:
+    Fraction(int n, int d) : num(n), den(d)
+    {
+    }
+    friend void addMixedFraction(Fraction f1, Fraction f2);
+};
+void addMixedFraction(Fraction f1, Fraction f2) {
+    int resNum, resDen;
+    if (f1.den == f2.den) {
+        resNum = f1.num + f2.num;
+        resDen = f1.den;
+    } else {
+        resNum = (f1.num * f2.den) + (f2.num * f1.den);
+        resDen = f1.den * f2.den;
+    }
+    cout << resNum << "/" << resDen << endl;
+}
+
+int main() {
+    int n1, d1, n2, d2;
+    if (cin >> n1 >> d1 >> n2 >> d2) {
+        Fraction f1(n1, d1), f2(n2, d2);
+        addMixedFraction(f1, f2);
+    }
+    return 0;
+}
