@@ -1,0 +1,90 @@
+//class templates to manage employee data effectively using inheritance and generic programming.
+
+#include <iostream>
+#include <iomanip> 
+using namespace std;
+
+template<class T>
+class EmployeeBase{
+public:
+    int ids[100];
+    char names[100][50];
+    T salaries[100];
+    int count;
+    EmployeeBase(){
+        count = 0;
+    }
+    template<typename N>
+    void addEmployee(int id, N n, T salary)
+    {
+        if(count<100){
+            ids[count]=id;
+            salaries[count]=salary;
+            int j=0;
+            while(n[j] != '\0' && j<49){
+                names[count][j]=n[j];
+                j++;
+            }
+            names[count][j]='\0';
+            count++;
+        }
+    }
+    void displayEmployeeDetails(){
+        for(int i=0; i<count; i++){
+            cout<<"ID: "<<ids[i]<<", Name: "<<names[i]<<", Salary: "<<fixed<<setprecision(2)<<salaries[i]<<endl;
+        }
+    }
+    T calculateTotalSalaryExpenditure(){
+        T total = 0;
+        for(int i=0; i<count; i++){
+            total += salaries[i];
+        }
+        return total;
+    }
+};
+template<class T>
+class FullTimeEmployee : public EmployeeBase<T> {};
+
+template<class T>
+class PartTimeEmployee : public EmployeeBase<T> {};
+
+int main() {
+    FullTimeEmployee<double> fullTimeEmp;
+    PartTimeEmployee<double> partTimeEmp;
+
+    int numFullTimeEmp;
+    cin >> numFullTimeEmp;
+
+    for (int i = 0; i < numFullTimeEmp; i++) {
+        int empId;
+        string empName;
+        double empSalary;
+
+        cin >> empId >> empName >> empSalary;
+
+        fullTimeEmp.addEmployee(empId, empName, empSalary);
+    }
+
+    int numPartTimeEmp;
+    cin >> numPartTimeEmp;
+
+    for (int i = 0; i < numPartTimeEmp; i++) {
+        int empId;
+        string empName;
+        double empSalary;
+
+        cin >> empId >> empName >> empSalary;
+
+        partTimeEmp.addEmployee(empId, empName, empSalary);
+    }
+
+    cout << "Full-time Employee Details:" << endl;
+    fullTimeEmp.displayEmployeeDetails();
+    cout << "Total Salary: " << fixed << setprecision(2) << fullTimeEmp.calculateTotalSalaryExpenditure() << endl;
+
+    cout << "Part-time Employee Details:" << endl;
+    partTimeEmp.displayEmployeeDetails();
+    cout << "Total Salary: " << fixed << setprecision(2) << partTimeEmp.calculateTotalSalaryExpenditure() << endl;
+
+    return 0;
+}
