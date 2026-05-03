@@ -1,0 +1,36 @@
+#include<iostream>
+using namespace std;
+class Rectangle{
+private:
+    int width, height;
+public:
+    void setDimensions(int width, int height){
+        this->width = width;
+        this->height = height;
+    }
+    int calculateArea() {
+        return this->width * this->height;
+    }
+    bool isEqual(Rectangle other) {
+        return (this->width == other.width && this->height == other.height);
+    }
+};
+
+int main() {
+    int w1, h1, w2, h2;
+    cin >> w1 >> h1;
+    cin >> w2 >> h2;
+    Rectangle rect1, rect2;
+    rect1.setDimensions(w1, h1);
+    rect2.setDimensions(w2, h2);
+    cout << "Area of rect1: " << rect1.calculateArea() << endl;
+    cout << "Area of rect2: " << rect2.calculateArea() << endl;
+
+    if (rect1.isEqual(rect2)) {
+        cout << "rect1 and rect2 have the same dimensions." << endl;
+    }
+    else {
+        cout << "rect1 and rect2 have different dimensions." << endl;
+    }
+    return 0;
+}
