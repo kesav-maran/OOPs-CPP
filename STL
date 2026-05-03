@@ -1,0 +1,34 @@
+//function template takes an array of booking amounts and the number of bookings as parameters, computes the sum of all booking amounts, and returns the total revenue.
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+template <typename T>
+
+T calculateTotalRevenue(T arr[], size_t n)
+{
+    T total = 0;
+    for(int i=0; i<n; i++){
+        total += arr[i];
+    }
+    return total;
+}
+
+int main() {
+    size_t numBookings;
+    cin >> numBookings;
+
+    size_t maxBookings = 1000; 
+
+    double bookingAmounts[1000]; 
+
+    for (size_t i = 0; i < numBookings; ++i) {
+        cin >> bookingAmounts[i];
+    }
+
+    double totalRevenue = calculateTotalRevenue(bookingAmounts, numBookings);
+
+    cout << fixed << setprecision(2) << totalRevenue;
+
+    return 0;
+}
