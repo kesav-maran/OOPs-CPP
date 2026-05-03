@@ -1,0 +1,78 @@
+#include <iostream>
+#include <stdexcept>
+
+#include <string>
+class DuplicateIDException : public std::exception {
+public:
+    std::string error_message() {
+        return "Error: Student ID already exists.";
+    }
+};
+class FullDatabaseException : public std::exception {
+public:
+    std::string error_message() {
+        return "Error: Student database is full.";
+    }
+};
+class Student {
+private:
+    int id;
+    std::string name;
+public:
+    Student(int i, std::string n) {
+        id = i;
+        name = n;
+    }
+    int getId() {
+        return id;
+    }
+};
+class SchoolManagement {
+private:
+    Student* students[30];
+    int count;
+public:
+    static int MAX_CAPACITY;
+    SchoolManagement() {
+        count = 0;
+    }
+    void addStudent(Student s) {
+        if (count >= MAX_CAPACITY) {
+            throw FullDatabaseException();
+        }
+        for (int i = 0; i < count; i++) {
+            if (students[i]->getId() == s.getId()) {
+                throw DuplicateIDException();
+            }
+        }
+        students[count] = new Student(s);
+        count++;
+        std::cout << "Student with ID " << s.getId() << " added to the database." << std::endl;
+    }
+};
+
+int SchoolManagement::MAX_CAPACITY = 30;
+
+int main() {
+    try {
+        SchoolManagement school;
+
+        int n;
+        std::cin >> n;
+
+        for (int i = 0; i < n; ++i) {
+            int idInput;
+            std::string nameInput;
+            std::cin >> idInput >> nameInput;
+
+            Student student(idInput, nameInput);
+            school.addStudent(student);
+        }
+    } catch (DuplicateIDException& e) {
+        std::cout << "Exception caught. " << e.error_message();
+    } catch (FullDatabaseException& e) {
+        std::cout << "Exception caught. " << e.error_message();
+    }
+
+    return 0;
+}
