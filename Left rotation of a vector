@@ -1,0 +1,33 @@
+//performs a left rotation on a vector by a given number of positions.
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+void insertElements(vector<int>& arr, size_t n) {
+    for (size_t i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+}
+void rotateArrayLeft(vector<int>& arr, size_t positions) {
+    rotate(arr.begin(), arr.begin() + positions, arr.end());
+}
+
+int main() {
+    size_t n;
+    cin >> n;
+    vector<int> arr(n);
+    insertElements(arr, n);
+
+    size_t positions;
+    cin >> positions;
+
+    rotateArrayLeft(arr, positions);
+
+    for (auto& element : arr) {
+        cout << element << " ";
+    }
+
+    return 0;
+}
