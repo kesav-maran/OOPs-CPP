@@ -1,0 +1,45 @@
+//calculating the total tax collected from employees earning above a certain threshold. 
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int totalAfterBonus(const vector<int>& salaries)
+{
+    int total=0;
+    for(int salary : salaries){
+        if(salary < 50000)
+        {
+            total += salary + (salary * 0.1);
+        }
+        else{
+            total+=salary;
+        }
+    }
+    return total;
+}
+int totalTax(const vector<int>& salaries)
+{
+    int total=0;
+    for(int salary : salaries){
+        if(salary > 60000)
+        {
+            total += salary * 0.1;
+        }
+    }
+    return total;
+}
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<int> salaries(n);
+    for (int i = 0; i < n; i++)
+        cin >> salaries[i];
+
+    cout << totalAfterBonus(salaries) << endl;
+    cout << totalTax(salaries) << endl;
+
+    return 0;
+}
